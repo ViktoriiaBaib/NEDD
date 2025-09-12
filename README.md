@@ -1,4 +1,5 @@
 # 🌱 Next Experiment Data Driven (NEDD)  
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 ### ✨ LLM Hackathon for Materials & Chemistry 2025  
 
 > **Smarter experiments, fewer wasted steps.**  
