@@ -54,6 +54,11 @@ We imagine NEDD as a **LLM-assisted experiment planner**, where you can:
 5. Iterate until your model converges.  
 
 ---
+## ▶️  How to Run
+1. ```streamlit run main.py```
+2. Open ```http://localhost:8501/```
+
+---
 
 ## 🌸 Hackathon Spirit  
 This project is being developed during the **LLM Hackathon for Materials & Chemistry 2025**.  
