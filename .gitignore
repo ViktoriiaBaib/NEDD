@@ -16,5 +16,4 @@ __pycache__/
 !.vscode/tasks.json
 
 # Data/artifacts
-data/
 outputs/
