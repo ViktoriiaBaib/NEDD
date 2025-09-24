@@ -14,10 +14,7 @@ from sklearn.preprocessing import StandardScaler
 
 # Configure the page
 st.set_page_config(
-    page_title="NEDD Server",
-    page_icon="🔬",
-    layout="wide",
-    initial_sidebar_state="collapsed"
+    page_title="NEDD Server", page_icon="🔬", layout="wide", initial_sidebar_state="collapsed"
 )
 
 # Custom CSS for better layout
@@ -311,7 +308,7 @@ def send_message_to_claude(message):
 
     try:
         response = st.session_state.anthropic_client.messages.create(
-            model="claude-3-sonnet-20240229",
+            model="claude-3-5-sonnet-20241022",
             max_tokens=1000,
             messages=[{"role": "user", "content": message}],
         )
