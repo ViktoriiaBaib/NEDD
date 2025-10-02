@@ -65,3 +65,33 @@ We imagine NEDD as a **LLM-assisted experiment planner**, where you can:
 This project is being developed during the **LLM Hackathon for Materials & Chemistry 2025**.  
 It’s a prototype with big dreams: **bringing AI + ML + LLMs together to accelerate experimental science**.  
 
+## ⚙️ Minimal install for non-developers. Choose your OS.
+<details>
+<summary><b>Windows — Recommended</b></summary>
+
+**One-time install**
+1. Download/clone the repo and open `scripts/windows/`.
+2. Double-click `install.bat`.
+   - If Miniconda isn’t installed, you’ll be prompted to install it.
+   - This creates the `nedd` conda env from `env/environment.windows.yml` and adds a desktop shortcut.
+
+**Run the app (every time)**
+- Double-click **Start My App** on the Desktop.
+
+</details>
+
+<details>
+<summary><b>macOS — Recommended</b></summary>
+
+**One-time install**
+1. Open Terminal and run:
+   ```bash```
+   ```chmod +x scripts/macos/*.command```
+   ```scripts/macos/install.command```
+   - This creates the conda env from env/environment.macos.yml and adds a Dock/Automator app or .command launcher.
+
+**Run the app (every time)**
+- Double-click **Start My App** on the Desktop.
+```bash```
+```scripts/macos/start_app.command```
+</details>

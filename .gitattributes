@@ -1,0 +1,16 @@
+# Default: use LF everywhere
+* text=auto eol=lf
+
+# Windows batch/PowerShell need CRLF
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+
+# macOS/Linux shell scripts need LF
+*.sh text eol=lf
+*.command text eol=lf
+
+# Python & YAML should always be LF
+*.py text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
