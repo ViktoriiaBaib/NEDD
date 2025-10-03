@@ -8,7 +8,7 @@ on:
 
 defaults:
   run:
-    shell: bash -l {0}
+    shell: bash -l {0}   # Always login bash so PATH is consistent
 
 jobs:
   pack:
@@ -16,6 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # 1) Create env from your YAML (no installers)
       - name: Setup micromamba
         uses: mamba-org/setup-micromamba@v1
         with:
@@ -26,15 +27,13 @@ jobs:
             -c conda-forge -c defaults
           init-shell: bash
 
-      - name: Install conda-pack (via pip inside env)
-        run: |
-          micromamba run -n nedd python -m pip install --upgrade pip
-          micromamba run -n nedd python -m pip install conda-pack "setuptools<81"
+      # 2) Install conda-pack (and quiet the setuptools warning)
+      - name: Install conda-pack in env
+        run: micromamba run -n nedd python -c "import sys, subprocess as sp; sp.check_call([sys.executable, '-m', 'pip', 'install', 'conda-pack', 'setuptools<81']); import conda_pack; print('conda-pack version:', conda_pack.__version__)"
 
-      - name: Pack environment (explicit prefix)
-        run: |
-          micromamba run -n nedd python -c "import sys, conda_pack; print('prefix:', sys.prefix); conda_pack.pack(prefix=sys.prefix, output='nedd_env.zip')"
-          ls -lh nedd_env.zip
+      # 3) Pack the environment using explicit prefix (avoids env autodetect issues)
+      - name: Pack environment to nedd_env.zip
+        run: micromamba run -n nedd python -c "import sys, conda_pack; print('prefix:', sys.prefix); conda_pack.pack(prefix=sys.prefix, output='nedd_env.zip')"; ls -lh nedd_env.zip
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
