@@ -1,0 +1,36 @@
+name: Build portable Windows env (conda-pack)
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - env/environment.windows.yml
+
+jobs:
+  pack:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Miniconda
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          channels: conda-forge,defaults
+          python-version: "3.11"
+          environment-file: env/environment.windows.yml
+          activate-environment: nedd
+          auto-update-conda: true
+
+      - name: Install conda-pack
+        shell: bash
+        run: conda install -y -n nedd -c conda-forge conda-pack
+
+      - name: Pack environment
+        shell: bash
+        run: conda pack -n nedd -o nedd_env.zip
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nedd_env
+          path: nedd_env.zip
