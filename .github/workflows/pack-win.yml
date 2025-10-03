@@ -6,10 +6,9 @@ on:
     paths:
       - env/environment.windows.yml
 
-# Use a login bash so PATH and activation are consistent
 defaults:
   run:
-    shell: bash -l {0}
+    shell: bash -l {0}   # login bash for consistent PATH
 
 jobs:
   pack:
@@ -17,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # 1) Micromamba sets up a minimal, no-install conda-like toolchain
+      # 1) Create env from your YAML (no Conda installer; uses micromamba)
       - name: Setup micromamba
         uses: mamba-org/setup-micromamba@v1
         with:
@@ -28,20 +27,20 @@ jobs:
             -c conda-forge -c defaults
           init-shell: bash
 
-      # 2) Install conda-pack inside the env (via pip to avoid any solver changes)
-      - name: Install conda-pack (pip)
+      # 2) Install conda-pack inside the env (pip is fine)
+      - name: Install conda-pack
         run: |
-          micromamba run -n nedd python -m pip install --no-input --upgrade pip
+          micromamba run -n nedd python -m pip install --upgrade pip
           micromamba run -n nedd python -m pip install conda-pack
           micromamba run -n nedd python - <<'PY'
           import conda_pack, sys
           print("conda-pack version:", conda_pack.__version__)
           PY
 
-      # 3) Pack the environment to a zip (module form avoids PATH issues)
+      # 3) Pack using the CLI entrypoint (NOT python -m)
       - name: Pack environment
         run: |
-          micromamba run -n nedd python -m conda_pack -o nedd_env.zip
+          micromamba run -n nedd conda-pack -o nedd_env.zip
           ls -lh nedd_env.zip
 
       - name: Upload artifact
