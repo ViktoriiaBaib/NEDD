@@ -111,7 +111,7 @@ It’s a prototype with big dreams: **bringing AI + ML + LLMs together to accele
 5. Place the downloaded file here:
    `~/Downloads/proj/NEDD/env/nedd_env.zip`
 6. Unzip _nedd_env.zip_ by double-clicking it.
-   This will create a new folder called _nedd_env_ inseide the _env/_ directory.
+   This will create a new folder called _nedd_env_ inside the _env/_ directory.
 7. Update internal paths inside the environment (one-time only).
    In Git Bash (MINGW64), navigate to NEDD and run:
    `cd ~/Downloads/proj/NEDD`
